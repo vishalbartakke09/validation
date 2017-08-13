@@ -77,7 +77,7 @@
 			}
 			var self = this;
 			_.each(this.data[layout], function(item, index){
-				if(item.selector === selector || item.path === selector){
+				if(item.selector === selector || item.path === selector || item.identifier === selector){
 					var $ele = $(item.selector, self.data.$form);
 					util.hide(self, item, '', $ele, $ele.val());
 					util.removeEvent(selector, self.data.$form);
@@ -92,7 +92,7 @@
 			}
 			var self = this;
 			_.each(this.data[layout], function(item, index){
-				if(item.selector === selector || item.path === selector) {
+				if(item.selector === selector || item.path === selector || item.identifier === selector) {
 					var $ele = $(item.selector, self.data.$form);
 					util.hide(self, item, '', $ele, $ele.val());
 					return true;
