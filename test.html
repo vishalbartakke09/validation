@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Mocha Tests</title>
+    <link rel="stylesheet" href="node_modules/mocha/mocha.css">
+  </head>
+  <body>
+    <div id="mocha"></div>
+    <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="node_modules/mocha/mocha.js"></script>
+    <script src="node_modules/chai/chai.js"></script>
+    <script>mocha.setup('bdd')</script>
+
+    <!-- Validation utils and layout -->
+    <script src="test/rules/layouts.js"></script>
+    <script src="test/util/domUtils.js"></script>
+    <!-- Validation plungin -->
+    <script src="src/validation.js"></script> 
+    
+    <!-- Validation test case -->
+    <script src="test/_TestCase.js"></script>
+    <script src="test/utilTestCase.js"></script>
+    <script src="test/validateMethodTestCase.js"></script>
+    <script src="test/validateTestCase.js"></script>
+    <script src="test/validateModelTestCase.js"></script>
+    <script>
+      mocha.run();
+    </script>
+  </bodsy>
+</html>
