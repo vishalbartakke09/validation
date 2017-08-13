@@ -1,6 +1,6 @@
 {
-  "name": "Validation",
-  "repository": "validation",
+  "name": "fmvalidation",
+  "repository": "vishalbartakke09/validation",
   "version": "1.0.0",
   "description": "UI validation library",
   "main": "./src/validate.js",
@@ -8,7 +8,7 @@
     "validate",
     "validation"
   ],
-  "author": "Vishal Bartakke <vishalbartakke09@gmail.com>",
+  "author": "Vishal Bartakke",
   "devDependencies": {
     "chai": "^4.0.2",
     "jsdom": "^11.0.0",

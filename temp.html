@@ -1,0 +1,329 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Validation Tests</title>
+
+<script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+
+
+
+<script type="text/javascript" src="src/validation.js"></script>
+<style>
+form{
+	border: 1px solid;
+	display: inline-block;
+	padding: 5px;
+}
+form > div{
+	margin-bottom: 5px;
+}
+</style>
+</head>
+
+<body id="body">
+<form class="form1">
+<div>Form 1 : Show All Error fn</div>
+<div class="error"></div>
+<div>
+	<div class="test1Error"></div>
+	<label>Test 1</label>
+	<input type="text" class="test1"/>
+</div>
+<div>
+	<div class="test2Error"></div>
+	<label>Test 2</label>
+	<input type="text" class="test2"/>
+</div>
+<button >Validate</button>
+</form>
+<form class="form2">
+<div>Form 2 : No error when isValid</div>
+<div class="error"></div>
+<div>
+	<div class="test1Error"></div>
+	<label>Test 1</label>
+	<input type="text" class="test1"/>
+</div>
+<div>
+	<div class="test2Error"></div>
+	<label>Test 2</label>
+	<input type="text" class="test2"/>
+</div>
+<div>
+	<div class="test2Error"></div>
+	<label>Test 3</label>
+	<input type="checkbox" class="test3"/>
+</div>
+<button>Validate</button>
+</form>
+<form class="form3">
+<div>Form 3 : Test with multiple</div>
+<div class="error"></div>
+<div>
+	<div class="test1Error"></div>
+	<label>Numbe</label>
+	<input type="text" class="test1"/>
+</div>
+<div>
+	<div class="test2Error"></div>
+	<label>Url Re</label>
+	<input type="text" class="test2"/>
+</div>
+<div>
+	<label>Test 3</label>
+	<input type="text" class="test3"/>
+</div>
+<button>Validate</button>
+</form>
+<form class="form4">
+<div>Form 4 : ON submit</div>
+<div class="error"></div>
+<div>
+	<div class="test1Error"></div>
+	<label>Numbe</label>
+	<input type="text" class="test1"/>
+</div>
+<div>
+	<div class="test2Error"></div>
+	<label>Url Re</label>
+	<input type="text" class="test2"/>
+</div>
+<button>Validate</button>
+</form>
+<form class="model1">
+<div>Model 1 </div>
+<div class="test1"></div>
+<div class="test2"></div>
+<button>Validate</button>
+</form>
+<form class="model2">
+<div>Model 2 </div>
+<div class="test1"></div>
+<div class="test2"></div>
+<button>Validate</button>
+</form>
+
+<script>
+/*v = [{
+	identifier: string
+	path: '',
+	selector: '.username',
+	rules: 
+	{
+		required: true,
+	}
+	message: {
+		required: 'This is required'
+	}
+	getValue: string/function //return value, validation will happen on this value instead of element or model
+	showError: funtion(){}
+	hideError: function(){}
+	errorContainer: 'selector'
+	}]*/
+	/*$('#dd').validation({
+		layout:v,
+		errorOnSubmit:true/false //false is default
+		errorOnChange: true/false //default is false
+		defaultError: true/false //true is default, default is when 
+		model: {}, // model if form not present this too will override default error message
+		showAllErrors: function(){}, //call this function if error and let user handle displaying error
+		hideAllErrors: function(){}, //call this function if no error and let user handle hiding error
+		errorContainer: '' //will override default error message and display all messages in this
+	});
+	
+	add - d
+	remove - d
+	resetErrors - d
+	validate - d
+	isValid - d
+	
+	
+*/
+Validation.addValidation('new', 'new', function(d){console.log(d);return false});
+window.form1 = $('.form1').validation({
+	layout:[{
+		selector: '.test1',
+		rules: {
+				required: true
+		},
+		messages: {
+			required: 'This is mandatory',
+		},
+		errorContainer: '.test1Error',
+		showError: function(d){
+			console.log(d)
+		},
+		hideError: function(d){
+			console.log(d)
+		}
+	}, {
+		selector: '.test2',
+		rules: {
+				required: true
+		},
+		messages: {
+			required: 'This is mandatory',
+			maxLength: 'Max Length is {0}',
+			
+		},
+		/*onSuccess: function(d){
+			console.log(d)
+		},
+		onError: function(d){
+			console.log(d)
+		}*/
+	}],
+	defaultError:true,
+	errorOnSubmit: false,
+	showAllErrors: function(errors){$('.form1 .error').html('vishal').show()},
+	hideAllErrors: function(){$('.error').hide()},
+	//errorContainer: '.error'	
+});
+window.form2 = $('.form2').validation({
+	layout:[{
+		selector: '.test1',
+		rules: {
+				required: true
+		},
+		messages: {
+			required: 'This is mandatory',
+			maxLength: 'Max Length is {0}',
+			
+		},
+		getValue:  function(){
+			return;
+		},
+		errorContainer: '.test1Error',
+		showError: function(d){
+			console.log(d)
+		},
+		hideError: function(d){
+			console.log(d)
+		}
+	}, {
+		selector: '.test2',
+		rules: {
+				required: true
+		},
+		messages: {
+			required: 'This is mandatory 2',
+			maxLength: 'Max Length is {0}',
+			
+		},
+		showError: function(d){
+			console.log(d)
+		},
+		hideError: function(d){
+			console.log(d)
+		}
+	},{
+		selector: '.test3',
+		rules: {
+				required: true
+		},
+		messages: {
+			required: 'This is mandatory 2'
+			
+		}
+	}],
+	defaultError:true,
+});
+window.form3 = $('.form3').validation({
+	layout:[{
+		selector: '.test1',
+		rules: {
+				required: true,
+				number: true
+		},
+		messages: {
+			required: 'This is mandatory',
+			number: 'Invalid Number'
+		}
+	}, {
+		selector: '.test2',
+		rules: {
+				required: true,
+				url: true	
+		},
+		messages: {
+			required: 'This is mandatory',		
+		},
+	}],
+	errorOnChange: true
+});
+t = {
+			selector: '.test3',
+			rules: {
+					required: true,
+			},
+			messages: {
+				required: 'Not'
+			}
+	};	
+	form3.addRule(t);
+window.form4 = $('.form4').validation({
+	layout:[{
+		selector: '.test1',
+		rules: {
+				required: true,
+				number: true
+		},
+		messages: {
+			required: 'This is mandatory',
+			number: 'Invalid Number'
+		}
+	}, {
+		selector: '.test2',
+		rules: {
+				required: true,
+				url: true	
+		},
+		messages: {
+			required: 'This is mandatory',		
+		},
+	}],
+	errorOnSubmit: true
+});
+
+	
+	m1 = {cd: {test1: 'test'}}
+window.model1 = $('.model1').validation({
+	layout:[{
+		path: 'cd.test1',
+		rules: {
+				required: true,
+				number: true
+		},
+		errorContainer: '.test1'
+	}, {
+		path: 'cd.xy.0.test2',
+		rules: {
+				required: true
+		 },
+		errorContainer: '.test2'
+	}],
+	model: m1
+});
+window.model2 = $('.model2').validation({
+	layout:[{
+		path: 'cd.test1',
+		rules: {
+				required: true
+		},
+		errorContainer: '.test1'
+	}, {
+		path: 'cd.xy.0.test2',
+		rules: {
+				required: true
+		},
+		errorContainer: '.test2'
+	}],
+	model: m1
+});
+
+	
+	//vv.removeRule('.username')
+</script>
+</body>
+</html>
